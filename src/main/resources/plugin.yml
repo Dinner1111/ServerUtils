@@ -1,43 +1,45 @@
 name: ServerUtils
 main: io.github.Dinner1111.ServerUtils.ServerUtilsPlugin
-version: 1.6.0.0
+version: 1.7.0.59
+author: dinner1111
+description: A powerful administrative plugin used for mass management.
 
 commands:
   util-op:
-    description: Utility for oping online players.
+    description: Utility for opping online players.
     usage: /util-op
     permission: Utils.Util.Op
-    permission-message: Sorry, but you don't have access to Utils.Util.Op.
+    permission-message: Sorry, you don't have access to Utils.Util.Op.
   util-deop:
-    description: Utility for deoping online players.
+    description: Utility for deopping online players.
     usage: /util-deop
     permission: Utils.Util.Deop
-    permission-message: Sorry, but you don't have access to Utils.Util.Deop.
+    permission-message: Sorry, you don't have access to Utils.Util.Deop.
   util-unwhitelist:
     description: Utility for unwhitelisting online players.
     usage: /util-unwhitelist
     permission: Utils.Util.Unwhitelist
-    permission-message: Sorry, but you don't have access to Utils.Util.Unwhitelist.
+    permission-message: Sorry, you don't have access to Utils.Util.Unwhitelist.
   util-kick:
     description: Utility for kicking online players.
-    usage: /util-kick [-u]
+    usage: /util-kick [-uw]
     permission: Utils.Util.Kick
-    permission-message: Sorry, but you don't have access to Utils.Util.Kick.
+    permission-message: Sorry, you don't have access to Utils.Util.Kick.
   util-help:
     description: Utility explaining various util-related things.
     usage: /util-help [page]
     permission: Utils.Util.Help
-    permission-message: Sorry, but you don't have access to Utils.Util.Help.
+    permission-message: Sorry, you don't have access to Utils.Util.Help.
   util-world:
     description: Utility for quickly making worlds.
     usage: /util-world [name]
     permission: Utils.Util.World
-    permission-message: Sorry, but you don't have access to Utils.Util.World.
+    permission-message: Sorry, you don't have access to Utils.Util.World.
   util-list:
     description: Utility listing all the usable utils.
     usage: /util-list [util]
     permission: Utils.Util.List
-    permission-message: Sorry, but you don't have access to Utils.Util.List.
+    permission-message: Sorry, you don't have access to Utils.Util.List.
   util-mute:
     description: Utility for muting online players.
     usage: /util-mute
@@ -46,30 +48,54 @@ commands:
   util-broadcast:
     description: Utility for broadcasting.
     usage: /util-broadcast
-    permission: Utils.Util.Broadcast
+    permission: Utils.Util.roadcast
     permission-message: Sorry, you don't have access to Utils.Util.Broadcast.
   util-kill:
     description: Utility for killing online players.
     usage: /util-kill
     permission: Utils.Util.Kill
     permission-message: Sorry, you don't have access to Utils.Util.Kill.
-  util-restart:
-    description: Utility for a scheduled restart.
-    usage: /util-restart
-    permission: Utils.Util.Restart
-    permission-message: Sorry, you don't have access to Utils.Util.Restart.
   a:
     description: Admin chat.
     usage: /a [message]
     permission: Utils.Util.AdminChat
     permission-message: Sorry, you don't have access to Utils.AdminChat.
   silent:
-    description: Silently ops or deops
+    description: Silent commands.
     usage: /silent [op|deop|whitelist|unwhitelist|kick|ban] [player name]
-    permission: Utils.SilentOp
+    permission: Utils.Silent
     permission-message: Sorry, you don't have access to Utils.Silent.
   announcer:
     description: Announces a message every given minutes.
     usage: /announcer [minutes] [message]
     permission: Utils.Announcer
     permission-message: Sorry, you don't have access to Utils.Announcer.
+  register:
+    description: Registers for the server.
+  util-version:
+    description: Displays version info.
+    usage: /util-version
+    permission: Utils.Util.Version
+    permission-message: Sorry, you don't have access to Utils.Util.Version.
+  hide:
+    description: Hides you or a specified player.
+    usage: /hide [player]
+    permission: Utils.Hide
+    permission-message: Sorry, you don't have access to Utils.Hide.
+  util-protect:
+    description: Protects a world from all players but the owner.
+    usage: /util-protect [player]
+    permission: Utils.Util.Protect
+    permission-message: Sorry, you don't have access to Utils.Util.Protect.
+  run:
+  util-spawn:
+  railgun:
+  script:
+  purge:
+  love:
+  util-config:
+  whirl:
+  util-reload:
+  pepsi:
+  bday:
+  util-alert:
