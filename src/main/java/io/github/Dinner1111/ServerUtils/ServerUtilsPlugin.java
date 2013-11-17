@@ -1,5 +1,16 @@
 package io.github.Dinner1111.ServerUtils;
 
+import io.github.Dinner1111.ServerUtils.Listeners.DeathListener;
+import io.github.Dinner1111.ServerUtils.Listeners.InventoryClickListener;
+import io.github.Dinner1111.ServerUtils.Listeners.JoinListener;
+import io.github.Dinner1111.ServerUtils.Listeners.LeaveListener;
+import io.github.Dinner1111.ServerUtils.Listeners.MuteListener;
+import io.github.Dinner1111.ServerUtils.Misc.CannoneerRunnable;
+import io.github.Dinner1111.ServerUtils.Misc.CaseManager;
+import io.github.Dinner1111.ServerUtils.Misc.MiscCommands;
+import io.github.Dinner1111.ServerUtils.Misc.Scripts;
+import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
+
 import java.io.File;
 
 import org.bukkit.Bukkit;
@@ -15,19 +26,12 @@ public class ServerUtilsPlugin extends JavaPlugin {
 	CaseManager cm = new CaseManager(start, this);
 	DeathListener deathListen = new DeathListener(cm);
 	MuteListener muteListen = new MuteListener(this, shared, start, config);
-	BlockListener blockListen = new BlockListener(this);
 	JoinListener joinListen = new JoinListener(this, start, config);
-	SpawnListener spawnListen = new SpawnListener(this);
 	LeaveListener leaveListen = new LeaveListener(this, shared, config);
-	CommandPreprocessListener cpListen = new CommandPreprocessListener(this, shared, start);
 	InventoryClickListener invListen = new InventoryClickListener(this, config);
 	
 	@Override
 	public void onEnable() {
-		File f = getDataFolder();
-		if(!f.exists()){
-		 Bukkit.broadcastMessage("DATA FOLDER DOES NOW EXIST");
-		}
 		getLogger().info("ServerUtils loaded.");
 		if (!(new File(getDataFolder(), "config.yml")).exists()) {
             saveDefaultConfig();
@@ -35,18 +39,11 @@ public class ServerUtilsPlugin extends JavaPlugin {
 		if (!(new File(getDataFolder(), "players.yml")).exists()) {
             config.saveDefaultConfig();
 		}
-		if (!(new File("log.txt")).exists()) {
-			File logger = new File("log.txt");
-			logger.setWritable(true);
-		}
         reloadConfig();
         start.splitter(true, true, true, true);
 		PluginManager pm = getServer().getPluginManager();
 		pm.registerEvents(muteListen, this);
-		pm.registerEvents(blockListen, this);
 		pm.registerEvents(joinListen, this);
-		pm.registerEvents(spawnListen, this);
-		pm.registerEvents(cpListen, this);
 		pm.registerEvents(leaveListen, this);
 		pm.registerEvents(deathListen, this);
 		pm.registerEvents(invListen, this);

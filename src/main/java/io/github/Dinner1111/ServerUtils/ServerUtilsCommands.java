@@ -1,6 +1,8 @@
 package io.github.Dinner1111.ServerUtils;
 
 import io.github.Dinner1111.ServerUtils.ChatThemes.ThemeType;
+import io.github.Dinner1111.ServerUtils.Misc.CaseManager;
+import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
 
 import java.util.List;
 

@@ -27,10 +27,10 @@ public class ThemeColors {
 	public void setColor4(ChatColor color4) {
 		this.color4 = color4;
 	}
-	ChatColor color1;
-	ChatColor color2;
-	ChatColor color3;
-	ChatColor color4;
+	public ChatColor color1;
+	public ChatColor color2;
+	public ChatColor color3;
+	public ChatColor color4;
 	public ThemeColors(ChatColor color1, ChatColor color2, ChatColor color3, ChatColor color4) {
 		this.color1 = color1;
 		this.color2 = color2;
