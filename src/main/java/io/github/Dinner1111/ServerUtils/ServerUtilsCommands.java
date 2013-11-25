@@ -23,24 +23,17 @@ import com.google.common.collect.Lists;
 public class ServerUtilsCommands implements CommandExecutor {
 	boolean muted = false;
 	Player firstSender;
-	boolean privateWorld = false;
 	int task;
-	int i;
-	String announcement = "";
-	boolean isAnnoying = false;
 	Plugin plg;
 	boolean isHidden;
 	boolean isBroadcasting = false;
 	SharedVariables sv;
 	CaseManager manager;
 	Startup start;
-	Location point1;
-	Location point2;
-	boolean debug = false;
-	Player player = null;
-	boolean railgun = false;
 	ConfigMethods cm;
+	SpawnerRunnable sr;
 	ChatThemes ct = new ChatThemes(plg);
+	Map<String, Map<EntityType, Double>> spawns = new HashMap<String, Map<EntityType, Double>>();
 	List<EntityType> mobs = Lists.newArrayList(EntityType.BAT, EntityType.BLAZE, EntityType.CAVE_SPIDER, EntityType.CREEPER, EntityType.ENDER_DRAGON, EntityType.GHAST, EntityType.GIANT, EntityType.MAGMA_CUBE, EntityType.PIG_ZOMBIE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME, EntityType.SPIDER, EntityType.WOLF, EntityType.ZOMBIE, EntityType.WITCH, EntityType.PRIMED_TNT);
 	
 	public ServerUtilsCommands(Plugin pl, SharedVariables shared, Startup s, CaseManager m, ConfigMethods c) {
