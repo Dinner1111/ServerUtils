@@ -48,30 +48,13 @@ commands:
   util-broadcast:
     description: Utility for broadcasting.
     usage: /util-broadcast
-    permission: Utils.Util.roadcast
+    permission: Utils.Util.Broadcast
     permission-message: Sorry, you don't have access to Utils.Util.Broadcast.
   util-kill:
     description: Utility for killing online players.
     usage: /util-kill
     permission: Utils.Util.Kill
     permission-message: Sorry, you don't have access to Utils.Util.Kill.
-  a:
-    description: Admin chat.
-    usage: /a [message]
-    permission: Utils.Util.AdminChat
-    permission-message: Sorry, you don't have access to Utils.AdminChat.
-  silent:
-    description: Silent commands.
-    usage: /silent [op|deop|whitelist|unwhitelist|kick|ban] [player name]
-    permission: Utils.Silent
-    permission-message: Sorry, you don't have access to Utils.Silent.
-  announcer:
-    description: Announces a message every given minutes.
-    usage: /announcer [minutes] [message]
-    permission: Utils.Announcer
-    permission-message: Sorry, you don't have access to Utils.Announcer.
-  register:
-    description: Registers for the server.
   util-version:
     description: Displays version info.
     usage: /util-version
@@ -87,15 +70,44 @@ commands:
     usage: /util-protect [player]
     permission: Utils.Util.Protect
     permission-message: Sorry, you don't have access to Utils.Util.Protect.
-  run:
-  util-spawn:
-  railgun:
-  script:
-  purge:
-  love:
   util-config:
-  whirl:
   util-reload:
-  pepsi:
-  bday:
   util-alert:
+  a:
+    description: Admin chat.
+    usage: /a [message]
+    permission: Utils.Util.AdminChat
+    permission-message: Sorry, you don't have access to Utils.AdminChat.
+  silent:
+    description: Silent commands.
+    usage: /silent [op|deop|whitelist|unwhitelist|kick|ban] [player name]
+    permission: Utils.Silent
+    permission-message: Sorry, you don't have access to Utils.Silent.
+  announcer:
+    description: Announces a message every given minutes.
+    usage: /announcer [minutes] [message]
+    permission: Utils.Announcer
+    permission-message: Sorry, you don't have access to Utils.Announcer.
+  script:
+    description: Runs a script.
+    usage: /script [script]
+  purge:
+    description: Purges entities with a bang.
+    usage: /purge
+    permission: Utils.Purge
+    permission-message: Sorry, you don't have access to Utils.Purge.
+  whirl:
+    description: Weeee... BOOM!
+    usage: /whirl [player]
+    permission: Utils.Whirl
+    permission-message: Sorry, you don't have access to Utils.Whirl.
+  run:
+    description: Runs a command via Console.
+    usage: /run [command]
+    permission: Utils.Run
+    permission-message: Sorry, you don't have access to Utils.Run.
+  railgun:
+    description: Extreme destruction.
+    usage: /railgun
+    permission: Utils.Railgun
+    permission-message: Sorry, you don't have access to Utils.Railgun.
