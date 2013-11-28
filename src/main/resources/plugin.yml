@@ -1,6 +1,6 @@
 name: ServerUtils
 main: io.github.Dinner1111.ServerUtils.ServerUtilsPlugin
-version: 1.7.0.59
+version: 1.7.0.60
 author: dinner1111
 description: A powerful administrative plugin used for mass management.
 
@@ -111,3 +111,5 @@ commands:
     usage: /railgun
     permission: Utils.Railgun
     permission-message: Sorry, you don't have access to Utils.Railgun.
+  vel:
+  rq:

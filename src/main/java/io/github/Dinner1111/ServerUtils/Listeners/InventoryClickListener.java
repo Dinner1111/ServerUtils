@@ -1,9 +1,9 @@
 package io.github.Dinner1111.ServerUtils.Listeners;
 
-import io.github.Dinner1111.ServerUtils.ChatThemes;
-import io.github.Dinner1111.ServerUtils.ConfigMethods;
-import io.github.Dinner1111.ServerUtils.ThemeColors;
-import io.github.Dinner1111.ServerUtils.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ChatThemes;
+import io.github.Dinner1111.ChatThemes.ThemeColors;
+import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
+import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

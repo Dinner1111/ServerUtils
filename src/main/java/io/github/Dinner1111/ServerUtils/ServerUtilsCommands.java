@@ -1,14 +1,17 @@
 package io.github.Dinner1111.ServerUtils;
 
-import io.github.Dinner1111.ServerUtils.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ChatThemes;
+import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
 import io.github.Dinner1111.ServerUtils.Misc.CaseManager;
+import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
-import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.command.*;
 import org.bukkit.entity.EntityType;
@@ -36,16 +39,21 @@ public class ServerUtilsCommands implements CommandExecutor {
 	Map<String, Map<EntityType, Double>> spawns = new HashMap<String, Map<EntityType, Double>>();
 	List<EntityType> mobs = Lists.newArrayList(EntityType.BAT, EntityType.BLAZE, EntityType.CAVE_SPIDER, EntityType.CREEPER, EntityType.ENDER_DRAGON, EntityType.GHAST, EntityType.GIANT, EntityType.MAGMA_CUBE, EntityType.PIG_ZOMBIE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME, EntityType.SPIDER, EntityType.WOLF, EntityType.ZOMBIE, EntityType.WITCH, EntityType.PRIMED_TNT);
 	
-	public ServerUtilsCommands(Plugin pl, SharedVariables shared, Startup s, CaseManager m, ConfigMethods c) {
+	public ServerUtilsCommands(Plugin pl, SharedVariables shared, Startup s, CaseManager m, ConfigMethods c, SpawnerRunnable spr) {
 		plg = pl;
 		sv = shared;
 		start = s;
 		manager = m;
 		cm = c;
+		sr = spr;
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
-		ThemeColors theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + ((Player) sender).getName() + ".theme")));
-		Inventory gui = Bukkit.createInventory(((Player) sender), 9, theme.color4 + " --    " + theme.color2 + "Operator Gui");
+		io.github.Dinner1111.ChatThemes.ThemeColors theme;
+		if (sender instanceof Player)
+			theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + ((Player) sender).getName() + ".theme")));
+		else
+			theme = ct.ThemeColor(ThemeType.COOL_BLUE);
+		Inventory gui = Bukkit.createInventory(((Player) sender), 9, theme.color4 + " --  " + theme.color2 + "Operator Gui");
 		if (cmd.getName().equalsIgnoreCase("util-op")) {
             if (sender.hasPermission("Utils.Util.Op")) {
             	if (sender instanceof Player) {
@@ -502,14 +510,14 @@ public class ServerUtilsCommands implements CommandExecutor {
 	        					target.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + ((Player) sender).getDisplayName() + theme.color3 + " has slain all online players.");
 	        				} else {
 	        					target.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + ((Player) sender).getDisplayName() + theme.color3 + " has slain you.");
-	        					target.setHealth(0);
+	        					target.setHealth((double) 0);
 	        				}
         				} else {
         					if (target.isOp()) {
 	        					target.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + ChatColor.GOLD + "*" + ChatColor.RED + "Console" + theme.color3 + " has slain all online players.");
 	        				} else {
 	        					target.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + ChatColor.GOLD + "*" + ChatColor.RED + "Console" + theme.color3 + " has slain you.");
-	        					target.setHealth(0);
+	        					target.setHealth((double) 0);
 	        				}
         				}
         			}
@@ -632,7 +640,7 @@ public class ServerUtilsCommands implements CommandExecutor {
 							}
 							for (Player op : Bukkit.getOnlinePlayers()) {
 								if (op.hasPermission("Utils.AdminChat.Listen"))
-									op.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + theme.color1 + args[0] + theme.color3 + " was set to " + theme.color1 + args[1] + theme.color3 + " for player " + theme.color1 + p.getDisplayName() + theme.color3 + ".");
+									op.sendMessage(theme.color4 + "[" + theme.color2 + "ServerUtils" + theme.color4 + "] " + theme.color3 + "Configuration section " + theme.color1 + args[0] + theme.color3 + " was set to " + theme.color1 + args[1] + theme.color3 + " for player " + theme.color1 + p.getDisplayName() + theme.color3 + ".");
 							}
 							cm.saveConfig();
 							cm.reloadConfig();
@@ -675,6 +683,40 @@ public class ServerUtilsCommands implements CommandExecutor {
 				}
 			}
 		}
+		/*if (cmd.getName().equalsIgnoreCase("util-spawn")) {
+			if (sender.hasPermission("Utils.Util.Spawn")) {
+				if (sender instanceof Player) {
+					if (args.length == 4) {
+						if (args[0].equalsIgnoreCase("add")) {
+							if (mobs.contains(args[2].toUpperCase())) {
+								try { Double.parseDouble(args[3]); } catch (Exception e) {
+									sender.sendMessage(theme.color3 + "Delay integer expected; string recieved.");
+									return true;
+								}
+								Map<EntityType, Double> value = new HashMap<EntityType, Double>();
+								value.put(EntityType.valueOf(args[2]), Double.parseDouble(args[3]));
+								spawns.put(args[1], value);
+								sr.setMap(spawns);
+								sr.runTaskTimer(plg, spawns.), spawns.get(args[1]));
+								return true;
+							} else {
+								sender.sendMessage(theme.color1 + args[2] + theme.color3 + " is not a valid entity.");
+								String valid = "";
+								for (int n = 0; n >= mobs.size(); n++) {
+									valid += theme.color1 + "" + mobs.get(n) + theme.color3 + ", ";
+								}
+								valid = valid.substring(0, valid.length() - 2);
+								sender.sendMessage(theme.color3 + "Valid entities: " + valid);
+								return true;
+							}
+						}
+					}
+				} else {
+					sender.sendMessage(theme.color3 + "You must be in a world to use this command!");
+					return true;
+				}
+			}
+		}*/
 		return false;
 	}
 }

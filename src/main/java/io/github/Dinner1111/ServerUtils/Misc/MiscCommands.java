@@ -1,26 +1,17 @@
 package io.github.Dinner1111.ServerUtils.Misc;
 
-import io.github.Dinner1111.ServerUtils.ChatThemes;
-import io.github.Dinner1111.ServerUtils.ConfigMethods;
-import io.github.Dinner1111.ServerUtils.ThemeColors;
-import io.github.Dinner1111.ServerUtils.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ChatThemes;
+import io.github.Dinner1111.ChatThemes.ThemeColors;
+import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import java.util.Random;
-
-
-
-
-
-
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Color;
 import org.bukkit.FireworkEffect;
-import org.bukkit.Material;
 import org.bukkit.FireworkEffect.Type;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -30,10 +21,7 @@ import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Firework;
 import org.bukkit.entity.Player;
 import org.bukkit.entity.Villager;
-import org.bukkit.inventory.Inventory;
-import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.util.Vector;
 
@@ -44,13 +32,9 @@ public class MiscCommands implements CommandExecutor {
 	SharedVariables sv;
 	int task;
 	CannoneerRunnable cr;
-	int i;
 	Map<Player, CannoneerRunnable> map = new HashMap<Player, CannoneerRunnable>();
-	Map<Player, Player> love = new HashMap<Player, Player>();
 	ChatThemes ct = new ChatThemes(plg);
 	ConfigMethods cm;
-	boolean bday = false;
-	boolean arrow = false;
 	public MiscCommands(Plugin pl, SharedVariables s, CannoneerRunnable run, ConfigMethods c) {
 		plg = pl;
 		sv = s;
@@ -301,55 +285,6 @@ public class MiscCommands implements CommandExecutor {
 				}
 			}
 		}
-		if (cmd.getName().equalsIgnoreCase("love")) {
-			if (sender.hasPermission("Utils.Love")) {
-				if (sender instanceof Player) {
-					if (args.length == 1) {
-						Player target = null;
-						try { target = Bukkit.getPlayer(args[0]); } catch (Exception e) {
-							sender.sendMessage(ChatColor.AQUA + args[0] + " is not online!");
-							return true;
-						}
-						final Player[] lovers = { ((Player) sender), target };
-						if (love.get(((Player) sender)) == null) {
-							love.put(((Player) sender), target);
-							Bukkit.getServer().broadcastMessage(((Player) sender).getDisplayName() + ChatColor.GRAY + " is in love with " + target.getDisplayName() + ChatColor.GRAY + "! How cute!");
-							i = Bukkit.getScheduler().scheduleSyncRepeatingTask(plg, new Runnable() { 
-								public void run() {
-									for (Player p : lovers) {
-										if (p.isOnline()) {
-											Firework fw = (Firework) p.getWorld().spawnEntity(p.getLocation(), EntityType.FIREWORK);
-											FireworkMeta fwm = fw.getFireworkMeta();
-											fwm.setPower(1);
-											fwm.addEffect(FireworkEffect.builder()
-												.with(Type.BALL)
-												.withColor(Color.RED)
-												.withFade(Color.FUCHSIA)
-												.withFlicker()
-												.build());
-											fw.setFireworkMeta(fwm);
-											/*Packet38EntityStatus packet = new Packet38EntityStatus(p.getEntityId(), (byte) 12);
-											for (Player pl : Bukkit.getOnlinePlayers())
-												((CraftPlayer) pl).getHandle().playerConnection.sendPacket(packet);*/
-										}
-									}
-								}
-							}, 100, 100);
-							return true;
-						} else {
-							love.remove(((Player) sender));
-							Bukkit.getServer().broadcastMessage(((Player) sender).getDisplayName() + ChatColor.GRAY + " is no longer in love with " + target.getDisplayName() + ChatColor.GRAY + "!");
-							Bukkit.getScheduler().cancelTask(i);
-							return true;
-						}
-					} else {
-						sender.sendMessage(ChatColor.GRAY + "Too many arguments.");
-						sender.sendMessage(ChatColor.GRAY + "Usage: " + ChatColor.AQUA + "/love [player]");
-						return true;
-					}
-				}
-			}
-		}
 		if (cmd.getName().equalsIgnoreCase("whirl")) {
 			if (args.length == 1) {
 				Player p;
@@ -423,85 +358,6 @@ public class MiscCommands implements CommandExecutor {
 				}
 			}
 		}
-		if (cmd.getName().equalsIgnoreCase("morph")) {
-			if (sender.hasPermission("Utils.Morph")) {
-				if (args.length == 0) {
-	            	Inventory gui = Bukkit.createInventory(((Player) sender), 9, theme.color4 + " --    " + theme.color2 + "Morphous Gui");
-	                ItemStack circle = new ItemStack(Material.HARD_CLAY);
-	                //MaterialData md = circle.getData();
-	                //md.setData(data);
-	                //circle.setData(data);
-	                ItemMeta meta = circle.getItemMeta();
-	                meta.setDisplayName(theme.color3 + "Circle");
-	                circle.setItemMeta(meta);
-	                ItemStack list = new ItemStack(Material.BOOK);
-	                meta = list.getItemMeta();
-	                meta.setDisplayName(theme.color3 + "List Online Ops");
-	                list.setItemMeta(meta);
-	                //gui.setItem(2, op);
-	                gui.setItem(6, list);
-	                ((Player) sender).openInventory(gui);
-	                return true;
-				} else {
-					sender.sendMessage(theme.color3 + "Too many arguments.");
-					sender.sendMessage(theme.color3 + "Usage: " + theme.color1 + "/gyro");
-				}
-			}
-		}
-		/*if (cmd.getName().equalsIgnoreCase("bday")) {
-			if (sender.hasPermission("Utils.BDay")) {
-				if (args.length == 1) {
-					if (!bday) {
-						Player user = null;
-						try { user = Bukkit.getPlayer(args[0]); } catch (Exception e) {
-							sender.sendMessage(theme.color1 + args[0] + theme.color3 + " is not online.");
-							return true;
-						}
-						final Player p = user;
-						i = Bukkit.getScheduler().scheduleSyncRepeatingTask(plg, new Runnable() {
-							public void run() {
-								Location[] locs = new Location[7];
-								int x = (int) p.getLocation().getX();
-								int y = (int) p.getLocation().getY() - 3;
-								int z = (int) p.getLocation().getZ();
-								locs[0] = new Location(p.getWorld(), x, y, z - 7);
-								locs[1] = new Location(p.getWorld(), x + 5, y, z - 5);
-								locs[2] = new Location(p.getWorld(), x - 5, y, z - 5);
-								locs[3] = new Location(p.getWorld(), x + 7, y, z);
-								locs[4] = new Location(p.getWorld(), x, y, z + 7);
-								locs[5] = new Location(p.getWorld(), x - 5, y, z + 5);
-								locs[6] = new Location(p.getWorld(), x + 5, y, z + 5);
-								Random r = new Random();
-								for (int i = 0; i >= locs.length; i++) {
-									Firework fw = (Firework) p.getWorld().spawnEntity(locs[i], EntityType.FIREWORK);
-									FireworkMeta fwm = fw.getFireworkMeta();
-									fwm.setPower(1);
-									fwm.addEffects(FireworkEffect.builder()
-											.with(Type.BURST)
-											.withColor(getColor(256))
-											.withFade(getColor(256))
-											.flicker(true)
-											.build());
-									fw.setFireworkMeta(fwm);
-								}
-							}
-						}, 0, 140);
-						bday = !bday;
-						sender.sendMessage(theme.color3 + "Happy birthday!");
-						return true;
-					} else {
-						Bukkit.getScheduler().cancelTask(i);
-						bday = !bday;
-						sender.sendMessage(theme.color3 + "No more celebrations?");
-						return true;
-					}
-				} else {
-					sender.sendMessage(theme.color3 + "Invalid arguments.");
-					sender.sendMessage(theme.color3 + "Usage: " + theme.color1 + "/bday [player]");
-					return true;
-				}
-			}
-		}*/
 		return false;
 	}
 	public Color getColor(int n) {

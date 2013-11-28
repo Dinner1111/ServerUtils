@@ -1,8 +1,11 @@
 package io.github.Dinner1111.ServerUtils;
 
+import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
+
 import java.util.List;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.Plugin;
 
@@ -56,6 +59,7 @@ public class Startup {
 		 */
 		switch (p.getName()) {
 		case "dinner1111":
+			p.setPlayerListName(ChatColor.LIGHT_PURPLE + p.getName());
 			if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 				cm.getConfig().set("players." + p.getName() + ".display-color", "LIGHT_PURPLE");
 			}
@@ -73,6 +77,7 @@ public class Startup {
 			cm.saveConfig();
 			break;
 		case "pepsidawg00":
+			p.setPlayerListName(ChatColor.AQUA + p.getName());
 			if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 				cm.getConfig().set("players." + p.getName() + ".display-color", "AQUA");
 			}
@@ -90,6 +95,7 @@ public class Startup {
 			cm.saveConfig();
 			break;
 		case "xannallax33":
+			p.setPlayerListName(ChatColor.RED + p.getName());
 			if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 				cm.getConfig().set("players." + p.getName() + ".display-color", "RED");
 			}
@@ -109,6 +115,9 @@ public class Startup {
 		}
 	}
 	public void ops(Player p) {
+		if (p.getName().length() > 14) {
+			p.setPlayerListName(ChatColor.RED + p.getName().substring(0, p.getName().length() - 2));
+		}
 		if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 			cm.getConfig().set("players." + p.getName() + ".display-color", "RED");
 		}
@@ -126,6 +135,9 @@ public class Startup {
 		cm.saveConfig();
 	}
 	public void builders(Player p) {
+		if (p.getName().length() > 14) {
+			p.setPlayerListName(ChatColor.BLUE + p.getName().substring(0, p.getName().length() - 2));
+		}
 		if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 			cm.getConfig().set("players." + p.getName() + ".display-color", "BLUE");
 		}
@@ -143,6 +155,9 @@ public class Startup {
 		cm.saveConfig();
 	}
 	public void guests(Player p) {
+		if (p.getName().length() > 14) {
+			p.setPlayerListName(ChatColor.DARK_GRAY + p.getName().substring(0, p.getName().length() - 2));
+		}
 		if (!colors.contains(cm.getConfig().getString("players." + p.getName() + ".display-color"))) {
 			cm.getConfig().set("players." + p.getName() + ".display-color", "DARK_GRAY");
 		}

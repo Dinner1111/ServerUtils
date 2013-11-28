@@ -7,9 +7,14 @@ import io.github.Dinner1111.ServerUtils.Listeners.LeaveListener;
 import io.github.Dinner1111.ServerUtils.Listeners.MuteListener;
 import io.github.Dinner1111.ServerUtils.Misc.CannoneerRunnable;
 import io.github.Dinner1111.ServerUtils.Misc.CaseManager;
+import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 import io.github.Dinner1111.ServerUtils.Misc.MiscCommands;
-import io.github.Dinner1111.ServerUtils.Misc.Scripts;
 import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
+import io.github.Dinner1111.ServerUtils.Misc.BetterCreepers.ExplosionListener;
+import io.github.Dinner1111.ServerUtils.Misc.RageQuit.RageQuitCommands;
+import io.github.Dinner1111.ServerUtils.Misc.Velocity.VelocityCommands;
+import io.github.Dinner1111.ServerUtils.Misc.Whitelister.Whitelister;
+import io.github.Dinner1111.ServerUtils.ProjectBuilder.Scripts;
 
 import java.io.File;
 
@@ -28,6 +33,7 @@ public class ServerUtilsPlugin extends JavaPlugin {
 	MuteListener muteListen = new MuteListener(this, shared, start, config);
 	JoinListener joinListen = new JoinListener(this, start, config);
 	LeaveListener leaveListen = new LeaveListener(this, shared, config);
+	SpawnerRunnable sr = new SpawnerRunnable();
 	InventoryClickListener invListen = new InventoryClickListener(this, config);
 	
 	@Override
@@ -47,23 +53,25 @@ public class ServerUtilsPlugin extends JavaPlugin {
 		pm.registerEvents(leaveListen, this);
 		pm.registerEvents(deathListen, this);
 		pm.registerEvents(invListen, this);
-		getCommand("util-op").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-deop").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-unwhitelist").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-kick").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-help").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-world").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-list").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-mute").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-broadcast").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-kill").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-spawn").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-protect").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-version").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-reload").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-alert").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("pepsi").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
-		getCommand("util-config").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config));
+		pm.registerEvents(new ExplosionListener(), this);
+		pm.registerEvents(new Whitelister(this), this);
+		getCommand("util-op").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-deop").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-unwhitelist").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-kick").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-help").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-world").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-list").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-mute").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-broadcast").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-kill").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-spawn").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-protect").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-version").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-reload").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-alert").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("pepsi").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
+		getCommand("util-config").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
 		getCommand("script").setExecutor(new Scripts(this));
 		getCommand("silent").setExecutor(new MiscCommands(this, shared, cr, config));
 		getCommand("announcer").setExecutor(new MiscCommands(this, shared, cr, config));
@@ -75,6 +83,8 @@ public class ServerUtilsPlugin extends JavaPlugin {
 		getCommand("whirl").setExecutor(new MiscCommands(this, shared, cr, config));
 		getCommand("purge").setExecutor(new MiscCommands(this, shared, cr, config));
 		getCommand("bday").setExecutor(new MiscCommands(this, shared, cr, config));
+		getCommand("rq").setExecutor(new RageQuitCommands());
+		getCommand("vel").setExecutor(new VelocityCommands());
 		Bukkit.getScheduler().scheduleSyncRepeatingTask(this, threads, (getConfig().getInt("announcement.delay") * 20 * 60), (getConfig().getInt("announcement.delay") * 20 * 60));
 	}
 	@Override

@@ -35,7 +35,7 @@ public class DeathListener implements Listener {
 	public void voidKill(EntityDamageEvent e) {
 		if (e.getEntityType().equals(EntityType.PLAYER) && e.getCause().equals(DamageCause.VOID)) {
 			Player p = ((Player) e.getEntity());
-			p.setHealth(20);
+			p.setHealth((double) 0);
 			p.setExhaustion(0);
 			p.setFallDistance(0);
 			p.setFireTicks(0);
