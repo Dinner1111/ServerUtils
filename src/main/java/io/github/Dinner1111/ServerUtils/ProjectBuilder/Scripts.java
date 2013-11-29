@@ -118,6 +118,7 @@ public class Scripts implements CommandExecutor {
 					if (sc.checkScript(args[0])) {
 						try { sc.runScript(args[0]); } catch (Exception e) {
 							commandSender = sender;
+							sv.setSender(commandSender);
 							sender.sendMessage(theme.color3 + "Script could not be run.");
 							Bukkit.getLogger().log(Level.SEVERE, "Could not run script " + args[0] + "!");
 							return true;
@@ -131,7 +132,6 @@ public class Scripts implements CommandExecutor {
 				}
 			}
 		}
-		sv.setSender(commandSender);
 		return false;
 	}
 }
