@@ -14,6 +14,7 @@ import io.github.Dinner1111.ServerUtils.Misc.BetterCreepers.ExplosionListener;
 import io.github.Dinner1111.ServerUtils.Misc.RageQuit.RageQuitCommands;
 import io.github.Dinner1111.ServerUtils.Misc.Velocity.VelocityCommands;
 import io.github.Dinner1111.ServerUtils.Misc.Whitelister.Whitelister;
+import io.github.Dinner1111.ServerUtils.ProjectBuilder.ScriptStorage;
 import io.github.Dinner1111.ServerUtils.ProjectBuilder.Scripts;
 
 import java.io.File;
@@ -35,6 +36,9 @@ public class ServerUtilsPlugin extends JavaPlugin {
 	LeaveListener leaveListen = new LeaveListener(this, shared, config);
 	SpawnerRunnable sr = new SpawnerRunnable();
 	InventoryClickListener invListen = new InventoryClickListener(this, config);
+	ScriptStorage sc = new ScriptStorage(shared);
+	Scripts s = new Scripts(this, config, shared, sc);
+	
 	
 	@Override
 	public void onEnable() {
@@ -72,7 +76,7 @@ public class ServerUtilsPlugin extends JavaPlugin {
 		getCommand("util-alert").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
 		getCommand("pepsi").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
 		getCommand("util-config").setExecutor(new ServerUtilsCommands(this, shared, start, cm, config, sr));
-		getCommand("script").setExecutor(new Scripts(this));
+		getCommand("script").setExecutor(new Scripts(this, config, shared, sc));
 		getCommand("silent").setExecutor(new MiscCommands(this, shared, cr, config));
 		getCommand("announcer").setExecutor(new MiscCommands(this, shared, cr, config));
 		getCommand("hide").setExecutor(new MiscCommands(this, shared, cr, config));

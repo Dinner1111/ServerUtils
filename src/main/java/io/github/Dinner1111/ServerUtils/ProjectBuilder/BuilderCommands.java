@@ -8,7 +8,7 @@ import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 
 public class BuilderCommands implements CommandExecutor {
-	Builder builder = new Builder();
+	ShapeBuilder builder = new ShapeBuilder();
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
 		if (cmd.getName().equalsIgnoreCase("builder")) {
 			if (sender instanceof Player) {
@@ -30,7 +30,7 @@ public class BuilderCommands implements CommandExecutor {
 						try { delay = Integer.parseInt(args[7]); } catch (Exception e) {
 							return false;
 						}
-						try { builder.buildRectangle(points[0], points[1], points[2], points[3], points[4], points[5], p, m, delay); } catch (InterruptedException e) {
+						try { builder.buildRectangle(points[0], points[1], points[2], points[3], points[4], points[5], p.getWorld(), m, delay); } catch (InterruptedException e) {
 							Bukkit.getLogger().log(Level.SEVERE, "Could not start building rectangle because the thread was interrupted.");
 							return false;
 						}

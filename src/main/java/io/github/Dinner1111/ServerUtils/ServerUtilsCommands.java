@@ -49,10 +49,11 @@ public class ServerUtilsCommands implements CommandExecutor {
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
 		io.github.Dinner1111.ChatThemes.ThemeColors theme;
-		if (sender instanceof Player)
+		if (sender instanceof Player) {
 			theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + ((Player) sender).getName() + ".theme")));
-		else
+		} else {
 			theme = ct.ThemeColor(ThemeType.COOL_BLUE);
+		}
 		Inventory gui = Bukkit.createInventory(((Player) sender), 9, theme.color4 + " --  " + theme.color2 + "Operator Gui");
 		if (cmd.getName().equalsIgnoreCase("util-op")) {
             if (sender.hasPermission("Utils.Util.Op")) {

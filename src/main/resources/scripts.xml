@@ -1,0 +1,15 @@
+<scripts>
+    <script name="world">
+        <commands>
+            <command>mvm set monsters false</command>
+            <command>mvm set animals false</command>
+            <command>mvm set weather false</command>
+            <command>mvm set mode 1</command>
+            <command>butcher -a</command>
+            <command>time day -l</command>
+        </commands>
+        <commandsender>
+            <sender>player</sender>
+        </commandsender>
+    </script>
+</scripts>

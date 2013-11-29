@@ -1,5 +1,6 @@
 package io.github.Dinner1111.ServerUtils.Misc;
 
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
 
@@ -8,6 +9,7 @@ public class SharedVariables {
 	public boolean isBroadcasting = false;
 	public String m = "";
 	public String[] cM = null;
+	CommandSender sender;
 	Player kicker;
 	
 	boolean getIsMuted() { return isMuted; }
@@ -24,4 +26,7 @@ public class SharedVariables {
 	
 	public Player getKicker() { return kicker; }
 	void setKicker(Player p) { kicker = p; }
+	
+	public CommandSender getSender() { return sender; }
+	public void setSender(CommandSender s) { sender = s; }
 }
