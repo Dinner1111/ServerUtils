@@ -684,40 +684,6 @@ public class ServerUtilsCommands implements CommandExecutor {
 				}
 			}
 		}
-		/*if (cmd.getName().equalsIgnoreCase("util-spawn")) {
-			if (sender.hasPermission("Utils.Util.Spawn")) {
-				if (sender instanceof Player) {
-					if (args.length == 4) {
-						if (args[0].equalsIgnoreCase("add")) {
-							if (mobs.contains(args[2].toUpperCase())) {
-								try { Double.parseDouble(args[3]); } catch (Exception e) {
-									sender.sendMessage(theme.color3 + "Delay integer expected; string recieved.");
-									return true;
-								}
-								Map<EntityType, Double> value = new HashMap<EntityType, Double>();
-								value.put(EntityType.valueOf(args[2]), Double.parseDouble(args[3]));
-								spawns.put(args[1], value);
-								sr.setMap(spawns);
-								sr.runTaskTimer(plg, spawns.), spawns.get(args[1]));
-								return true;
-							} else {
-								sender.sendMessage(theme.color1 + args[2] + theme.color3 + " is not a valid entity.");
-								String valid = "";
-								for (int n = 0; n >= mobs.size(); n++) {
-									valid += theme.color1 + "" + mobs.get(n) + theme.color3 + ", ";
-								}
-								valid = valid.substring(0, valid.length() - 2);
-								sender.sendMessage(theme.color3 + "Valid entities: " + valid);
-								return true;
-							}
-						}
-					}
-				} else {
-					sender.sendMessage(theme.color3 + "You must be in a world to use this command!");
-					return true;
-				}
-			}
-		}*/
 		return false;
 	}
 }
