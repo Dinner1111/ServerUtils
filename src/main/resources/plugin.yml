@@ -71,8 +71,20 @@ commands:
     permission: Utils.Util.Protect
     permission-message: Sorry, you don't have access to Utils.Util.Protect.
   util-config:
+    description: Command for editing the config.
+    usage: /util-config [player] [configuration section] [value]
+    permission: Utils.Util.Config
+    permission-message: Sorry, you don't have access to Utils.Util.Config.
   util-reload:
+    description: Reloads all configs or display names.
+    usage: /util-reload [-n[--aobg]]
+    permission: Utils.Util.Reload
+    permission-message: Sorry, you don't have access to Utils.Util.Reload.
   util-alert:
+    description: Sends an alert out to all players.
+    usage: /util-alerts [message]
+    permission: Utils.Util.Alert
+    permission-message: Sorry, you don't have access to Utils.Util.Alert.
   a:
     description: Admin chat.
     usage: /a [message]
@@ -112,4 +124,12 @@ commands:
     permission: Utils.Railgun
     permission-message: Sorry, you don't have access to Utils.Railgun.
   vel:
+    description: Sets, adds or multiplies your current velocity.
+    usage: /vel [set|add|multiply] [x] [y] [z]
+    permission: Utils.Velocity
+    permission-message: Sorry, you don't have access to Utils.Velocity.
   rq:
+    description: Rage quittin' for days.
+    usage: /rq [-c]
+    permission: Utils.RageQuit
+    permission-message: Sorry, you don't have access to Utils.RageQuit.
