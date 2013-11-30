@@ -4,6 +4,7 @@ import java.util.logging.Level;
 
 import io.github.Dinner1111.ChatThemes.ChatThemes;
 import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ThemeColors;
 import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
 
@@ -26,7 +27,7 @@ public class Scripts implements CommandExecutor {
 		this.sc = sc;
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
-		io.github.Dinner1111.ChatThemes.ThemeColors theme;
+		ThemeColors theme;
 		if (sender instanceof Player) {
 			theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + ((Player) sender).getName() + ".theme")));
 		} else {

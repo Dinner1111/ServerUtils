@@ -2,6 +2,7 @@ package io.github.Dinner1111.ServerUtils;
 
 import io.github.Dinner1111.ChatThemes.ChatThemes;
 import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ThemeColors;
 import io.github.Dinner1111.ServerUtils.Misc.CaseManager;
 import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
@@ -34,21 +35,19 @@ public class ServerUtilsCommands implements CommandExecutor {
 	CaseManager manager;
 	Startup start;
 	ConfigMethods cm;
-	SpawnerRunnable sr;
 	ChatThemes ct = new ChatThemes(plg);
 	Map<String, Map<EntityType, Double>> spawns = new HashMap<String, Map<EntityType, Double>>();
 	List<EntityType> mobs = Lists.newArrayList(EntityType.BAT, EntityType.BLAZE, EntityType.CAVE_SPIDER, EntityType.CREEPER, EntityType.ENDER_DRAGON, EntityType.GHAST, EntityType.GIANT, EntityType.MAGMA_CUBE, EntityType.PIG_ZOMBIE, EntityType.SILVERFISH, EntityType.SKELETON, EntityType.SLIME, EntityType.SPIDER, EntityType.WOLF, EntityType.ZOMBIE, EntityType.WITCH, EntityType.PRIMED_TNT);
 	
-	public ServerUtilsCommands(Plugin pl, SharedVariables shared, Startup s, CaseManager m, ConfigMethods c, SpawnerRunnable spr) {
+	public ServerUtilsCommands(Plugin pl, SharedVariables shared, Startup s, CaseManager m, ConfigMethods c) {
 		plg = pl;
 		sv = shared;
 		start = s;
 		manager = m;
 		cm = c;
-		sr = spr;
 	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
-		io.github.Dinner1111.ChatThemes.ThemeColors theme;
+		ThemeColors theme;
 		if (sender instanceof Player) {
 			theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + ((Player) sender).getName() + ".theme")));
 		} else {

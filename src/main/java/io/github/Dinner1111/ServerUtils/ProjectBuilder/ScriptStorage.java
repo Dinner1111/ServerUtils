@@ -1,5 +1,8 @@
 package io.github.Dinner1111.ServerUtils.ProjectBuilder;
 
+import java.io.IOException;
+import java.util.logging.Level;
+
 import io.github.Dinner1111.ServerUtils.Misc.SharedVariables;
 
 import org.bukkit.Bukkit;
@@ -109,6 +112,13 @@ public class ScriptStorage {
 		for (int i = 0; i > oldXML.size(); i++)
 			root.appendChild(oldXML.get(i));
 		XML = new Document(root);
+		try {
+			Serializer serializer = new Serializer(System.out, "UTF-8");
+			serializer.setIndent(4);
+			serializer.write(XML);
+		} catch (IOException e) {
+			Bukkit.getLogger().log(Level.SEVERE, "Could not serialize the Document!");
+		}
 	}
 	public boolean deleteScript(String name) {
 		Elements elements = XML.getRootElement().getChildElements();

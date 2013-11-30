@@ -1,5 +1,7 @@
 package io.github.Dinner1111.ServerUtils.Misc.Whitelister;
 
+import io.github.Dinner1111.ServerUtils.PluginManager.Manager;
+
 import java.util.List;
 
 import org.bukkit.event.EventHandler;
@@ -11,11 +13,14 @@ import com.google.common.collect.Lists;
 
 public class Whitelister implements Listener {
 	Plugin plg;
-	public Whitelister(Plugin pl) {
+	Manager manager;
+	public Whitelister(Plugin pl, Manager m) {
 		plg = pl;
+		manager = m;
 	}
 	@EventHandler
 	public void listen(PlayerLoginEvent e) {
+		if (!manager.checkEnabled("whitelister")) return;
 		List<String> whitelistees = Lists.newArrayList();
 		try { whitelistees = plg.getConfig().getStringList("whitelisted"); } catch (Exception ex) { }
 		if (!whitelistees.contains(e.getPlayer().getName()))

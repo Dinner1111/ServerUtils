@@ -2,6 +2,7 @@ package io.github.Dinner1111.ServerUtils;
 
 import io.github.Dinner1111.ChatThemes.ChatThemes;
 import io.github.Dinner1111.ChatThemes.ChatThemes.ThemeType;
+import io.github.Dinner1111.ChatThemes.ThemeColors;
 import io.github.Dinner1111.ServerUtils.Misc.ConfigMethods;
 
 import org.bukkit.Bukkit;
@@ -18,10 +19,9 @@ public class Threads extends BukkitRunnable {
 		plg = pl;
 		cm = c;
 	}
-	@Override
 	public void run() {
 		for (Player p : Bukkit.getOnlinePlayers()) {
-			io.github.Dinner1111.ChatThemes.ThemeColors theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + p.getName() + ".theme")));
+			ThemeColors theme = ct.ThemeColor(ThemeType.valueOf(cm.getConfig().getString("players." + p.getName() + ".theme")));
 			p.sendMessage(theme.color4 + "[" + theme.color2 + "Announcement" + theme.color4 + "] " + theme.color3 + plg.getConfig().getString("announcement.message"));
 		}
 		Bukkit.getConsoleSender().sendMessage(ChatColor.DARK_GRAY + "[" + ChatColor.BLUE + "Announcement" + ChatColor.DARK_GRAY + "] " + ChatColor.GRAY + plg.getConfig().getString("announcement.message"));

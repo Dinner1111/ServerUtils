@@ -1,12 +1,19 @@
 package io.github.Dinner1111.ServerUtils.Misc.Velocity;
 
+import io.github.Dinner1111.ServerUtils.PluginManager.Manager;
+
 import org.bukkit.ChatColor;
 import org.bukkit.command.*;
 import org.bukkit.entity.Player;
 import org.bukkit.util.Vector;
 
 public class VelocityCommands implements CommandExecutor {
+	Manager manager;
+	public VelocityCommands(Manager m) {
+		manager = m;
+	}
 	public boolean onCommand(CommandSender sender, Command cmd, String cmdLine, String[] args) {
+		if (!manager.checkEnabled("velocity")) return true;
 		if (cmd.getName().equalsIgnoreCase("vel")) {
 			if (sender instanceof Player) {
 				if (args.length == 4 && (args[0].equalsIgnoreCase("set") || args[0].equalsIgnoreCase("add") || args[0].equalsIgnoreCase("mult"))) {
